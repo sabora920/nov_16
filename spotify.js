@@ -26,18 +26,19 @@ let artist;
 
 const getArtist = function (name) {
   getFromApi('search', {
-    q: "kygo",
+    q: "name",
     type: "artist",
     limit: 1
   }).then(item => {
     artist = item.artists.items[0]
     console.log(artist);
+    return getFromApi(`/v1/artists/${artist.id}`);
   })
   
   return artist;
 };
 
-getArtist('kygo');
+// getArtist('kygo');
 
 
 
