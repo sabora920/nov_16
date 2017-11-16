@@ -13,8 +13,6 @@ const getFromApi = function (endpoint, query = {}) {
     headers
   };
 
-  console.log(headers);
-
   Object.keys(query).forEach(key => url.searchParams.append(key, query[key]));
   return fetch(url, requestObject).then(function (response) {
     if (!response.ok) {
@@ -24,15 +22,15 @@ const getFromApi = function (endpoint, query = {}) {
   });
 };
 
-console.log(getFromApi('search', {"q":"name", "limit":1, "type":"artist"}));
-
 let artist;
 
 const getArtist = function (name) {
-  // Edit me!
-  // (Plan to call `getFromApi()` several times over the whole exercise from here!)
-  artist = item.artists.items[0];
-
+  getFromApi('search', {
+    q: "kygo",
+    type: "artist",
+    limit: 1
+  })
+  return artist;
 };
 
 
