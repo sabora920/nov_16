@@ -1,4 +1,4 @@
-const CLIENT_ID = 'eb6dfffda5534bb5996e872487be4321';
+const CLIENT_ID = '84fe6b45ab3640fcb0f99f4df4fd8a2e';
 
 const getFromApi = function (endpoint, query = {}) {
   // You won't need to change anything in this function, but you will use this function 
@@ -13,6 +13,8 @@ const getFromApi = function (endpoint, query = {}) {
     headers
   };
 
+  console.log(headers);
+
   Object.keys(query).forEach(key => url.searchParams.append(key, query[key]));
   return fetch(url, requestObject).then(function (response) {
     if (!response.ok) {
@@ -22,12 +24,17 @@ const getFromApi = function (endpoint, query = {}) {
   });
 };
 
+console.log(getFromApi('search', {"q":"name", "limit":1, "type":"artist"}));
+
 let artist;
 
 const getArtist = function (name) {
   // Edit me!
   // (Plan to call `getFromApi()` several times over the whole exercise from here!)
+  artist = item.artists.items[0];
+
 };
+
 
 
 
