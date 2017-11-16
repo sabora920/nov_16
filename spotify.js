@@ -32,19 +32,25 @@ const getArtist = function (name) {
     limit: 1
   }).then(item => {
     artist = item.artists.items[0];
-    console.log(artist);
+    // console.log(artist);
     return getFromApi(`artists/${artist.id}/related-artists`);
   }).then(item => { //item represents array of artist objects/related objects
     artist.related = item.artists;
-    // const promises = [];
-    // artist.related.forEach(relatedArtist  => {
-    //   // const { id } = relatedArtist;
-    // promises.push(getFromApi(`artists/${id}`));
+    const promises = [];
+    artist.related.forEach(relatedArtist  => {
+      const { id } = relatedArtist;
+    promises.push(getFromApi(`artists/${id}/top-tracks`, {country: 'US'}));
  
-    // });
+    });
+    return Promise.all(promises);   
+  }).then((item)=>{
+    // const artistsWithTopTracks = [];
+
+    item.forEach((topTracks, index) => {
+      artist.related[index].topTracks = item.tracks;
+    })
     console.log(artist);
     return artist;
-    //return Promise.all(promises);   
   }).catch(err => {
     console.error('There was an error in your search!');
   });
