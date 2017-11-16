@@ -39,7 +39,7 @@ const getArtist = function (name) {
     // const promises = [];
     // artist.related.forEach(relatedArtist  => {
     //   // const { id } = relatedArtist;
-      // promises.push(getFromApi(`artists/${id}`));
+    // promises.push(getFromApi(`artists/${id}`));
  
     // });
     console.log(artist);
