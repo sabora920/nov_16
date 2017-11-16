@@ -29,11 +29,15 @@ const getArtist = function (name) {
     q: "kygo",
     type: "artist",
     limit: 1
+  }).then(item => {
+    artist = item.artists.items[0]
+    console.log(artist);
   })
+  
   return artist;
 };
 
-
+getArtist('kygo');
 
 
 
