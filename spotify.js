@@ -25,7 +25,6 @@ const getFromApi = function (endpoint, query = {}) {
 };
 
 let artist;
-
 const getArtist = function (name) {
   return getFromApi('search', {
     q: name,
@@ -35,25 +34,19 @@ const getArtist = function (name) {
     artist = item.artists.items[0];
     console.log(artist);
     return getFromApi(`artists/${artist.id}/related-artists`);
-  
   }).then(item => { //item represents array of artist objects/related objects
     artist.related = item.artists;
-    const promises = [];
-    artist.related.forEach(relatedArtist  => {
-      const { id } = relatedArtist;
-      promises.push(getFromApi(`artists/${id}`));
-    });
-    console.log(promises);  
-    return Promise.all(promises);    
-
-    
-   
-  
-
+    // const promises = [];
+    // artist.related.forEach(relatedArtist  => {
+    //   // const { id } = relatedArtist;
+      // promises.push(getFromApi(`artists/${id}`));
+ 
+    // });
+    console.log(artist);
+    return artist;
+    //return Promise.all(promises);   
   }).catch(err => {
     console.error('There was an error in your search!');
-  /*.then*/
-
   });
 };
 
