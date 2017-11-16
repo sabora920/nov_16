@@ -26,15 +26,17 @@ let artist;
 
 const getArtist = function (name) {
   getFromApi('search', {
-    q: "name",
+    q: name,
     type: "artist",
     limit: 1
   }).then(item => {
     artist = item.artists.items[0]
     console.log(artist);
-    return getFromApi(`/v1/artists/${artist.id}`);
+    return getFromApi(`artists/${artist.id}`);
+  }).catch(err => {
+    console.error(`There was an error in your search!`)
   })
-  
+
   return artist;
 };
 
